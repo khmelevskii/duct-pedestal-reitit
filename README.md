@@ -13,6 +13,9 @@ TODO:
 - Generate swagger
 - Add tests
 
+*Please pay attention*
+`duct.module/sql` was added and configured with using `postgres`. So you should run postgres database or comment `duct.module/sql` parts.
+
 ## Developing
 
 ### Setup
