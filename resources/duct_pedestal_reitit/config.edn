@@ -1,0 +1,35 @@
+{:duct.profile/base
+ {:duct.core/project-ns duct-pedestal-reitit
+
+  :duct-pedestal-reitit/server
+  {:service #:io.pedestal.http {:router #ig/ref :duct-pedestal-reitit/router
+                                :host   #duct/env "SERVER_HOST"
+                                :port   #duct/env ["SERVER_PORT" Int :or 3000]}}
+
+  :duct.database.sql/hikaricp
+  {:adapter       "postgresql"
+   :username      #duct/env "DATABASE_USER"
+   :password      #duct/env "DATABASE_PASSWORD"
+   :database-name #duct/env "DATABASE_NAME"
+   :server-name   #duct/env "DATABASE_HOST"
+   :port-number   #duct/env "SERVER_PORT"}
+
+  :duct-pedestal-reitit/router
+  {:tasks #ig/ref :duct-pedestal-reitit.services.tasks/routes}
+
+  :duct-pedestal-reitit.services.tasks/routes
+  {:db #ig/ref :duct.database/sql}
+
+  :duct.migrator/ragtime
+  {:database   #ig/ref :duct.database/sql
+   :strategy   :raise-error
+   :migrations []}}
+
+ :duct.profile/migration #duct/include "migration"
+ :duct.profile/dev       #duct/include "dev"
+ :duct.profile/local     #duct/include "local"
+ :duct.profile/prod      {}
+
+ :duct-pedestal-reitit.modules/pedestal {}
+ :duct.module/logging                   {}
+ :duct.module/sql                       {}}

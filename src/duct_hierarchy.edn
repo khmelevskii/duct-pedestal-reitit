@@ -1,0 +1,4 @@
+{:duct.profile/migration                [:duct/profile]
+ :duct-pedestal-reitit.modules/pedestal [:duct/module]
+ :duct-pedestal-reitit/server           [:duct/server]}
+

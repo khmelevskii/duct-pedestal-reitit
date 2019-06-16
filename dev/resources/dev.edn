@@ -1,0 +1,5 @@
+{:duct.database.sql/hikaricp
+ {:username      "postgres"
+  :database-name "postgres"
+  :server-name   "localhost"
+  :port-number   5432}}
